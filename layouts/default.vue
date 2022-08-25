@@ -5,8 +5,10 @@
         <div class="nhsuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1"
           style="margin-top: 16px;margin-bottom: 16px;">
           <h2 class="nhsuk-error-summary__title" id="error-summary-title" style="margin: 0">
-            Please note: <span class="nhsuk-caption-l">This page is solely for demonstrating the appearance of the
-              digital Step 1 proficiencies platform during a temporary review process.</span>
+            Please note: 
+            <span class="nhsuk-caption-l">
+              This page is solely for demonstrating the appearance and content of the digitised Step 1 proficiencies. Your progress won't save and you won't be able to use all the functionality (i.e. certain buttons are disabled)
+            </span>
           </h2>
         </div>
       </div>

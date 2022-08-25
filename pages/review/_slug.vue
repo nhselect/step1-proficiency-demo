@@ -24,27 +24,21 @@
         <div class="nhsuk-form-group">
 
           <h3 class="nhsuk-u-margin-bottom-1">{{ questionText }}</h3>
-          <div class="nhsuk-hint">
+          <div v-if="proficiencyItem.index > 3" class="nhsuk-hint">
             <p>If you have selected `Ongoing assessment`, please include your action plan below</p>
           </div>
           <div class="nhsuk-radios nhsuk-u-margin-bottom-3 nhsuk-u-margin-top-3">
-            <div class="nhsuk-radios__item">
+            <div
+              v-for="option in questionOptions"
+              :key="option"
+              class="nhsuk-radios__item"
+            >
               <input class="nhsuk-radios__input select-all-checkbox" name="[0].Result" id="radio-11-1"
-                data-group="group11" type="radio" value="1" aria-describedby="radio-11-1-item-hint">
+                data-group="group11" type="radio" value="1" aria-describedby="radio-11-1-item-hint" disabled="true">
               <label class="nhsuk-label nhsuk-radios__label" for="radio-11-1">
-                Achieved
+                {{ option }}
               </label>
               <div class="nhsuk-hint nhsuk-radios__hint" id="radio-11-1-item-hint">
-
-              </div>
-            </div>
-            <div class="nhsuk-radios__item">
-              <input class="nhsuk-radios__input select-all-checkbox" name="[0].Result" id="radio-11-2"
-                data-group="group11" type="radio" value="2" aria-describedby="radio-11-2-item-hint">
-              <label class="nhsuk-label nhsuk-radios__label" for="radio-11-2">
-                Ongoing assessment
-              </label>
-              <div class="nhsuk-hint nhsuk-radios__hint" id="radio-11-2-item-hint">
 
               </div>
             </div>
@@ -62,7 +56,7 @@
             Action Plan
           </label>
           <textarea class="nhsuk-input text-area-edit-90" placeholder="Optional" id="tb-supportingComments-11"
-            name="[0].SupportingComments" type="text"></textarea>
+            name="[0].SupportingComments" type="text" disabled="true"></textarea>
         </div>
 
         <input type="hidden" name="competencyGroupId" value="36">
@@ -139,6 +133,16 @@ export default {
       }
       else {
         return "Skill achieved?"
+      }
+    },
+    questionOptions() {
+      if (this.questionText === "Do you agree to responsibilities laid out?" )
+      {
+        return ['Disagree','Agree']
+      }
+      else
+      {
+        return ['Achieved','Ongoing assessment']
       }
     },
     proficiencyCount() {
