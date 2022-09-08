@@ -1,8 +1,7 @@
 <template>
   <div class="nhsuk-width-container" id="maincontentwrapper">
     <main class="nhsuk-main-wrapper" id="maincontent" tabindex="-1">
-      <h1>Step 1 Proficiencies - National Proficiency Framework for Registered Nurses in Adult Critical Care -
-        Proficiencies</h1>
+      <h1>Step 1 Proficiencies - National Proficiency Framework for Registered Nurses in Adult Critical Care</h1>
       <form method="post" action="/v2/SelfAssessment/SelfAssessmentOverview">
         <div class="search-container">
           <div class="search-box-container" id="search">
@@ -109,18 +108,20 @@ import ProficiencyGroup from '~/components/ProficiencyGroup.vue'
 
 export default Vue.extend({
   name: "IndexPage",
-  computed: {
-    proficiencyGroupArray() {
-      const step1data = this.$store.state.proficiencies
+  async asyncData({ $content, params }) {
+    const slug = params.slug || "index";
+    const step1data = await $content('step1').fetch()
 
-      return step1data.reduce((r: any, c: any) => {
+    const proficiencyGroupArray = step1data.reduce((r: any, c: any) => {
         r[c['Competency group']] = r[c['Competency group']] || []
         r[c['Competency group']].push(c)
         return r
       }, Object.create(null))
-    },
-    proficiencyCount() {
-      return this.$store.state.proficiencies.length
+
+    const proficiencyCount = step1data.length
+
+    return {
+      proficiencyGroupArray, proficiencyCount
     }
   },
   components: { ProficiencyGroup }

@@ -3,7 +3,7 @@
     <tr role="row" class="nhsuk-table__row first-row">
       <td role="cell" rowspan="1" class="nhsuk-table__cell">
 
-        <div v-if="proficiency['Purple (supernumary competency)'] == 'Yes'" class="nhsuk-u-margin-bottom-3">
+        <div v-if="proficiency['Purple (supernumerary competency)'] == 'Yes'" class="nhsuk-u-margin-bottom-3">
           <span class="nhsuk-u-padding-right-2 nhsuk-u-padding-left-4">
             <strong class="nhsuk-tag nhsuk-tag--purple">
               Supernumerary

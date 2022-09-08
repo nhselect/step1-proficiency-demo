@@ -12,7 +12,7 @@
         <div v-html="proficiencyItem['Competency description']"></div>
         <p></p>
       </div>
-      <div v-if="proficiencyItem['Purple (supernumary competency)'] == 'Yes'" class="nhsuk-u-margin-bottom-3">
+      <div v-if="proficiencyItem['Purple (supernumerary competency)'] == 'Yes'" class="nhsuk-u-margin-bottom-3">
           <span class="nhsuk-u-padding-right-2">
             <strong class="nhsuk-tag nhsuk-tag--purple">
               Supernumerary
@@ -114,40 +114,31 @@
 
 <script>
 export default {
-  async asyncData({ params }) {
-    const slug = params.slug
-    return { slug }
+  async asyncData({ $content, params }) {
+    
+    const slug = params.slug || "index";
+
+    const proficiencyItem = await $content('step1').where(
+      { index: parseInt(slug) }
+    ).fetch().then((r) => r[0])
+
+    const proficiencyCount = await $content('step1').fetch().then((r) => r.length)
+
+    const desc = proficiencyItem['Competency description']
+
+    const questionText = (desc.indexOf('<p>As a ') !== -1) ? "Do you agree to responsibilities laid out?" : (desc.indexOf('<p>You must be able to demonstrate through discussion') !== -1) ? "Knowledge achieved?" : "Skill achieved?"
+
+    const questionOptions = questionText === "Do you agree to responsibilities laid out?" ? ['Disagree','Agree'] : ['Achieved','Ongoing assessment']
+
+    return { 
+      proficiencyItem,
+      proficiencyCount,
+      questionText,
+      questionOptions,
+      slug
+    }
   },
   computed: {
-    proficiencyItem() {
-      const slugInt = parseInt(this.slug)
-      return this.$store.getters.getByIndex(slugInt)
-    },
-    questionText() {
-      const desc = this.proficiencyItem['Competency description']
-      if (desc.indexOf('<p>As a ') !== -1) {
-        return "Do you agree to responsibilities laid out?"
-      }
-      else if (desc.indexOf('<p>You must be able to demonstrate through discussion') !== -1) {
-        return "Knowledge achieved?"
-      }
-      else {
-        return "Skill achieved?"
-      }
-    },
-    questionOptions() {
-      if (this.questionText === "Do you agree to responsibilities laid out?" )
-      {
-        return ['Disagree','Agree']
-      }
-      else
-      {
-        return ['Achieved','Ongoing assessment']
-      }
-    },
-    proficiencyCount() {
-      return this.$store.state.proficiencies.length
-    },
     prevLink() {
       return Math.max(parseInt(this.slug) - 1, 1).toString()
     },

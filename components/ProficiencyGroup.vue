@@ -40,6 +40,7 @@
           <ProficiencyItem
             v-for="(proficiency, index) in group"
             :key="proficiency['ItemInternalId']"
+            :index="index"
             :proficiency="proficiency"
             :id="'comp-'+index"
           />

@@ -10,6 +10,7 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "@nuxt/content": "^1",
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.19.3",
     "nhsuk-frontend": "^6.1.2",
