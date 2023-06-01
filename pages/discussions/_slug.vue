@@ -1,0 +1,5 @@
+<template>
+  <h1>
+    Discussion
+  </h1>
+</template>
