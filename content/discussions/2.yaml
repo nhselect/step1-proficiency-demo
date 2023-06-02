@@ -1,0 +1,13 @@
+title: Interview 2
+created: 2023-07-23 11:35
+completed: false
+posts:
+  - author: Learner
+    postedAt: 2023-07-23 11:35
+    content: This is my summary of our initial conversation
+  - author: Assessor
+    postedAt: 2023-07-23 15:00
+    content: Here's my response as your assessor
+  - author: Learner
+    postedAt: 2023-07-23 17:05
+    content: I agree with this summary

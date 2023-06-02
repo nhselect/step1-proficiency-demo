@@ -61,6 +61,10 @@
         Export to Excel
       </a>
 
+      <a class="nhsuk-button nhsuk-button--secondary" role="button" href="/discussions">
+        Discussions
+      </a>
+
 
       <p><span role="alert">{{ proficiencyCount }} matching proficiencies</span></p>
 

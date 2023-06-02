@@ -23,7 +23,8 @@ export default {
   css: [
     '@/assets/css/nhsuk.css',
     '@/assets/css/index.css',
-    '@/assets/css/layout.css'
+    '@/assets/css/layout.css',
+    '@/assets/css/selfAssessment.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
