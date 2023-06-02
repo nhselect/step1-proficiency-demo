@@ -6,7 +6,7 @@
         Record discussions related to the programme.
       </p>
       <p>
-        Posts may not be edited once posted. Discussions can be marked as 'completed' and locked for future posts once done.
+        Posts may not be edited once posted. Discussions can be marked as 'closed' and locked for future posts once done.
       </p>
       <p class="nhsuk-body-l nhsuk-u-font-weight-bold">
         {{ discussionCount }} discussions ({{ discussionsOpen }} open)
@@ -27,6 +27,7 @@
               :completedBy="item.completedBy || null"
               :created="item.created"
               :postCount="item.posts ? item.posts.length : 0"
+              :participants="item.posts ? getParticipants(item.posts) : ''"
             >
             </DiscussionItem>
           </li>
@@ -53,7 +54,13 @@ export default Vue.extend({
       discussions, discussionCount, discussionsOpen
     }
   },
-  components: { DiscussionItem }
+  components: { DiscussionItem },
+  methods: {
+    getParticipants(posts) {
+      const participants = [...new Set(posts.map((p) => p.author))]
+      return participants
+    }
+  }
 })
 </script>
 

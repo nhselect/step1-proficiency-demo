@@ -1,11 +1,11 @@
 <template>
   <div class="nhsuk-width-container" id="maincontentwrapper">
     <main class="nhsuk-main-wrapper" id="maincontent" tabindex="-1">
-      <h1>{{ discussion.title }}</h1>
+      <h1>Close discussion: <span class="nhsuk-caption-xl">{{ discussion.title }}</span></h1>
       <p class="nhsuk-body-s">Started on {{ discussion.created }}</p>
       <p>
         <span v-if="discussion.completed" class="nhsuk-tag nhsuk-tag--red">
-          Closed at {{ discussion.completedAt }} by {{ discussion.completedBy }}
+          Completed at {{ discussion.completedAt }} by {{ discussion.completedBy }}
         </span>
         <span v-else class="nhsuk-tag nhsuk-tag--green">
           Open discussion
@@ -26,18 +26,29 @@
         </ul>
       </div>
       <hr />
-      <div v-if="discussion.completed">
-        <p>This discussion has been closed so you can't add any more comments</p>
-      </div>
-      <div v-else class="buttons">
+      <div class="buttons">
         <div class="nhsuk-form-group">
-          <label class="nhsuk-label nhsuk-label--l" for="newcomment">Add a comment:</label>
-          <textarea class="nhsuk-textarea" name="newcomment" rows="5"></textarea>
-        </div>
+
+          <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
+            <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+              <h1 class="nhsuk-fieldset__heading">
+                Are you sure you want to close this discussion?
+              </h1>
+            </legend>
+
+            <div class="nhsuk-hint" id="example-hint">
+              No one will be able to post any further contributions once the discussion has been closed.
+            </div>
+
+            <div class="nhsuk-checkboxes">
+
+              <div class="nhsuk-checkboxes__item">
+                <input class="nhsuk-checkboxes__input" id="example-1" name="example" type="checkbox" value="email">
+                <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                  I confirm this discussion has been completed and no further contributions are required
+                </label>
+              </div></div></fieldset></div>
         <a class="nhsuk-button" href="#">
-          Post
-        </a>
-        <a class="nhsuk-button nhsuk-button--secondary" :href="`/discussions/close/${slug}`">
           Close discussion
         </a>
       </div>
@@ -58,7 +69,7 @@ export default Vue.extend({
     const postCount = discussion.posts ? discussion.posts.length : 0
 
     return {
-      discussion, postCount, slug
+      discussion, postCount
     }
   },
   components: { DiscussionComment }
